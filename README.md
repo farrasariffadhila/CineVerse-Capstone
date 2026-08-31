@@ -1,166 +1,124 @@
-# 🎬 CineVerse - Android Capstone Project
+# CineVerse
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Platform-Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" />
-  <img src="https://img.shields.io/badge/Language-Kotlin-7F52FF?style=for-the-badge&logo=kotlin&logoColor=white" />
-  <img src="https://img.shields.io/badge/Architecture-Clean%20Architecture-0052CC?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/DI-Koin-EB445A?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Security-SQLCipher%20%26%20Pinning-2E7D32?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/CI-GitHub%20Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white" />
-</p>
+CineVerse adalah aplikasi katalog film Android yang dibangun menggunakan **TheMovieDB (TMDb) API**. Proyek ini dibuat untuk memenuhi submission **Capstone Project** pada kelas Menjadi Android Developer Expert di Dicoding.
+
+Aplikasi ini mengimplementasikan standar arsitektur modern Android, meliputi **Clean Architecture**, **Modularization (Multi-Module & Dynamic Feature)**, **Reactive Programming dengan Coroutines & Flow**, **Dependency Injection dengan Koin**, serta aspek **Security** dan **Performance**.
 
 ---
 
-## 📖 Overview
+## Screenshots
 
-**CineVerse** is a modern, modular Android application built as a Capstone project for the **Dicoding Android Developer Expert** curriculum. The app interacts with the **TheMovieDB (TMDb) API** to deliver a cinematic movie discovery and offline collection experience adhering to industry best practices, Clean Architecture, Modularization, Dynamic Feature Delivery, Reactive Streams, and robust security standards.
-
----
-
-## 📱 Screenshots
-
-<p align="center">
-  <img src="docs/images/home.png" width="23%" alt="Home Screen" />
-  <img src="docs/images/detail.png" width="23%" alt="Detail Screen" />
-  <img src="docs/images/search.png" width="23%" alt="Search Screen" />
-  <img src="docs/images/favorite.png" width="23%" alt="Favorites Screen" />
-</p>
-
-<p align="center">
-  <em>From left to right: Home (Featured & Category Filters), Movie Details, Real-time Debounced Search, and Offline Encrypted Favorites</em>
-</p>
+| Home (Katalog Film) | Detail Movie | Live Search | Favorites (Offline Room) |
+| :---: | :---: | :---: | :---: |
+| <img src="docs/images/home.png" width="220" /> | <img src="docs/images/detail.png" width="220" /> | <img src="docs/images/search.png" width="220" /> | <img src="docs/images/favorite.png" width="220" /> |
 
 ---
 
-## ✨ Features
+## Fitur Utama & Fitur Tambahan
 
-- **🔥 Discovery & Category Filtering**: Browse popular movies, now playing titles in theaters, and all-time top-rated cinema.
-- **⚡ Live Reactive Search**: Real-time search powered by Kotlin Coroutine Flow with `debounce(300)` to optimize network bandwidth and user experience.
-- **🎬 Cinematic Movie Details**: Rich backdrop visual header, voting average, vote counts, release dates, storylines, and movie sharing.
-- **❤️ Offline Favorite Collection**: Save movies to a secure, locally encrypted database accessible anytime without an internet connection.
-- **🧩 Dynamic Feature Delivery**: Modularized `:favorite` feature delivered dynamically on-demand with Jetpack Navigation deep linking.
-- **✨ Polished Cinema UI**: Material 3 Obsidian & Gold cinema theme, Shimmer loading placeholders, and smooth transitions.
+1. **Katalog Film (Home)**:
+   - Menampilkan daftar film populer, sedang tayang (*Now Playing*), dan rating tertinggi (*Top Rated*) menggunakan category filter.
+   - Dilengkapi *featured banner* di bagian atas.
+2. **Detail Film**:
+   - Menampilkan informasi lengkap: poster, backdrop, sinopsis (*storyline*), rating, dan jumlah ulasan.
+   - Tombol Floating Action Button (FAB) untuk menyimpan atau menghapus film dari daftar favorit.
+   - Tombol Share untuk membagikan info film ke aplikasi lain.
+3. **Favorite Movie (Dynamic Feature Module `:favorite`)**:
+   - Menampilkan daftar film yang telah disimpan pengguna ke database lokal Room.
+   - Dapat diakses secara offline.
+4. **Live Search**:
+   - Pencarian film secara real-time menggunakan reactive stream `debounce(300ms)` untuk mengurangi beban request ke network.
+5. **UI & UX**:
+   - Tema gelap (*Dark Theme*).
+   - Efek *Shimmer loading* untuk placeholder saat memuat data.
+   - Penanganan *empty state* dan *error state* dengan tombol *Try Again*.
 
 ---
 
-## 🏛️ Architecture & Modularization
+## Arsitektur & Modularisasi
 
-The project strictly follows **Clean Architecture** principles and **Multi-Module** separation of concerns:
+Aplikasi ini menggunakan **Clean Architecture** yang dibagi ke dalam 3 modul:
 
 ```text
 Capstone/
-├── app/                  # Base Application Module (Presentation Layer)
-│   ├── presentation/     # UI, Activities, Fragments, ViewModels, UI Models
-│   └── di/               # AppModule for Presentation ViewModels
-├── core/                 # Shared Android Library Module
-│   ├── data/             # Remote API (Retrofit), Local DB (Room + SQLCipher), Repository Implementation
-│   ├── domain/           # Pure Business Logic, Domain Models, Use Cases, Repository Interfaces
-│   └── di/               # Core DI (Network, Database, Repository)
-└── favorite/             # Dynamic Feature Module
-    ├── src/              # FavoriteFragment, FavoriteViewModel, Dynamic Navigation
-    └── di/               # On-demand Favorite Koin Module
+├── app/                  # Base Application / Presentation Layer (UI, ViewModel, NavGraph)
+├── core/                 # Android Library Module (Data, Domain, Network, Database, DI)
+└── favorite/             # Dynamic Feature Module (Halaman Favorit & On-demand DI)
 ```
 
 ```mermaid
 graph TD
-    subgraph "Base App Layer (:app)"
-        APP_UI["Presentation (HomeFragment, SearchFragment, DetailActivity, SplashActivity)"]
-        APP_VM["ViewModels (HomeViewModel, SearchViewModel, DetailViewModel)"]
-        APP_MODEL["Presentation Model (MovieUiModel) & Mappers"]
-    end
+    APP["Module :app<br/>(Presentation / UI)"]
+    FAV["Module :favorite<br/>(Dynamic Feature)"]
+    CORE["Module :core<br/>(Domain & Data Layer)"]
 
-    subgraph "Dynamic Feature Layer (:favorite)"
-        FAV_UI["FavoriteFragment / FavoriteActivity"]
-        FAV_VM["FavoriteViewModel"]
-        FAV_DI["Dynamic Koin Module (loadKoinModules)"]
-    end
-
-    subgraph "Core Library Layer (:core)"
-        DOMAIN["Domain Layer<br/>• Movie (Domain Model)<br/>• IMovieRepository<br/>• MovieUseCase & MovieInteractor"]
-        DATA["Data Layer<br/>• ApiService (TMDb Retrofit)<br/>• MovieDatabase & MovieDao (Room)<br/>• MovieRepositoryImpl & NetworkBoundResource"]
-        CORE_DI["Core DI (databaseModule, networkModule, repositoryModule)"]
-    end
-
-    APP_UI --> DOMAIN
-    APP_VM --> DOMAIN
-    FAV_UI --> DOMAIN
-    FAV_VM --> DOMAIN
-    DATA --> DOMAIN
-    APP_UI -.->|Dynamic Navigation & DeepLink| FAV_UI
+    APP --> CORE
+    FAV --> CORE
+    APP -.->|Jetpack Navigation & DeepLink| FAV
 ```
 
----
-
-## 🛡️ Security Implementation
-
-1. **Database Encryption (SQLCipher)**:
-   - All offline movie bookmarks in Room are encrypted using **SQLCipher** (`net.zetetic:android-database-sqlcipher:4.5.4`) with 256-bit passphrase hashing.
-   - Configured in [CoreModule.kt](core/src/main/java/com/example/capstone/core/di/CoreModule.kt).
-2. **Network Certificate Pinning (OkHttp)**:
-   - SSL Certificate Pinning via OkHttp `CertificatePinner` locking public key hashes for `api.themoviedb.org` to prevent Man-in-the-Middle (MITM) attacks.
-3. **Code Obfuscation & Resource Shrinking (ProGuard / R8)**:
-   - Minification, dead-code removal, and resource shrinking enabled in release build with comprehensive rules in `app/proguard-rules.pro` and `favorite/proguard-rules.pro`.
+### Pemisahan Model (3 Distinct Models)
+Untuk mematuhi prinsip Clean Architecture, model dipisahkan pada setiap layernya:
+- **Data Layer**: `MovieResponse` (DTO network) dan `MovieEntity` (Entity Room database).
+- **Domain Layer**: `Movie` (Pure Kotlin domain model tanpa dependensi framework).
+- **Presentation Layer**: `MovieUiModel` (Model siap pakai untuk UI).
+- Dihubungkan menggunakan `DataMapper` di modul `:core` dan `DomainToPresentationMapper` di modul `:app`.
 
 ---
 
-## ⚡ Performance & Zero Memory Leaks
+## Kriteria Capstone Akhir
 
-- **LeakCanary 2.14**: Integrated in `debugImplementation` to actively monitor View and Fragment lifecycles.
-- **0 Distinct Leaks**: Strict lifecycle cleanup implemented across all Fragment ViewHolders, ViewBindings, and Coroutine collectors.
+### 1. Jetpack Navigation Antar Module
+- Menggunakan `DynamicNavHostFragment` pada `activity_main.xml`.
+- Navigasi ke modul Dynamic Feature `:favorite` menggunakan Navigation Graph (`nav_graph.xml`) dan DeepLink `cineverse://favorite`.
+
+### 2. Security
+- **Database Encryption**: Database Room dienkripsi menggunakan **SQLCipher** (`net.zetetic:android-database-sqlcipher:4.5.4`) dengan `SupportFactory`.
+- **Certificate Pinning**: Menggunakan OkHttp `CertificatePinner` dengan SHA-256 public key hash dari SSL TMDb API (`api.themoviedb.org`).
+- **Code Obfuscation (ProGuard / R8)**: Mengaktifkan `isMinifyEnabled = true` dan `isShrinkResources = true` pada release build, lengkap dengan rules di `proguard-rules.pro`.
+
+### 3. Performance & Memory Leak (LeakCanary)
+- Menerapkan **LeakCanary** (`leakcanary-android:2.14`) pada `debugImplementation`.
+- Seluruh adapter dan binding didetach pada `onDestroyView()` untuk memastikan **0 Distinct Leaks**.
 
 <p align="center">
-  <img src="docs/images/leakcanary.png" width="35%" alt="LeakCanary 0 Leaks" />
+  <img src="docs/images/leakcanary.png" width="300" alt="LeakCanary 0 Leaks" />
 </p>
 
----
-
-## 🔄 Continuous Integration (CI)
-
-Automated testing and APK build pipeline configured via **GitHub Actions** in [`.github/workflows/android.yml`](.github/workflows/android.yml):
-
-- Automated JDK 17 setup & dependency caching.
-- Automated unit test validation (`./gradlew testDebugUnitTest`).
-- Automated debug APK packaging (`./gradlew assembleDebug`).
-- Artifact publishing for build verification.
+### 4. Continuous Integration (CI)
+- Menggunakan **GitHub Actions** (`.github/workflows/android.yml`) untuk menjalankan automated unit tests dan build APK saat push/pull request.
 
 ---
 
-## 🛠️ Tech Stack & Libraries
+## Tech Stack & Dependencies
 
-- **Language**: Kotlin 1.9.24
-- **Architecture**: Clean Architecture (Presentation, Domain, Data)
-- **Dependency Injection**: Koin 3.5.6 (with dynamic on-demand loading)
+- **Language**: Kotlin
+- **Architecture**: Clean Architecture (MVVM)
+- **Dependency Injection**: Koin
 - **Asynchronous / Reactive**: Kotlin Coroutines & Flow (`StateFlow`, `debounce`, `flatMapLatest`)
-- **Networking**: Retrofit 2.11.0, OkHttp 4.12.0, Gson Converter
-- **Local Persistence**: Room Database 2.6.1 + SQLCipher 4.5.4
-- **Image Loading**: Glide 4.16.0
-- **UI Components**: Android XML, ViewBinding, Material 3, Facebook Shimmer, SwipeRefreshLayout
-- **Navigation**: Jetpack Navigation 2.8.5 (Dynamic Features & DeepLinks)
-- **Quality Assurance**: LeakCanary 2.14, JUnit 4, Kotlinx Coroutines Test
+- **Networking**: Retrofit 2, OkHttp 4, Gson
+- **Local Database**: Room + SQLCipher
+- **Image Loader**: Glide
+- **UI**: Android XML, ViewBinding, Material 3, Shimmer
+- **Navigation**: Jetpack Navigation Component (Dynamic Features)
+- **Testing**: JUnit 4, Kotlinx Coroutines Test
+- **Tooling**: LeakCanary, ProGuard / R8
 
 ---
 
-## 🚀 Getting Started
+## Cara Menjalankan Project
 
-### Prerequisites
-- Android Studio Ladybug | 2024.2.1+ or newer
-- JDK 17
-- Android SDK API 34+
-
-### Clone and Run
-```bash
-# 1. Clone the repository
-git clone https://github.com/<your-username>/CineVerse-Capstone.git
-cd CineVerse-Capstone
-
-# 2. Run unit tests
-./gradlew testDebugUnitTest
-
-# 3. Assemble and install on connected device/emulator
-./gradlew installDebug
-```
-
----
-
-## 📄 License
-This project is developed for educational purposes as part of the **Dicoding Indonesia** Android Developer Expert learning path.
+1. Clone repository ini:
+   ```bash
+   git clone https://github.com/<username>/<nama-repo>.git
+   cd <nama-repo>
+   ```
+2. Buka project di **Android Studio** (disarankan versi Ladybug / 2024.2+ dengan JDK 17).
+3. Jalankan unit test untuk memverifikasi fungsionalitas mapper dan use case:
+   ```bash
+   ./gradlew testDebugUnitTest
+   ```
+4. Jalankan aplikasi ke emulator atau device fisik:
+   ```bash
+   ./gradlew installDebug
+   ```
