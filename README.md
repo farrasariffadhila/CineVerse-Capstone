@@ -110,8 +110,8 @@ Untuk mematuhi prinsip Clean Architecture, model dipisahkan pada setiap layernya
 
 1. Clone repository ini:
    ```bash
-   git clone https://github.com/<username>/<nama-repo>.git
-   cd <nama-repo>
+   git clone https://github.com/farrasariffadhila/CineVerse-Capstone.git
+   cd CineVerse-Capstone
    ```
 2. Buka project di **Android Studio** (disarankan versi Ladybug / 2024.2+ dengan JDK 17).
 3. Jalankan unit test untuk memverifikasi fungsionalitas mapper dan use case:
