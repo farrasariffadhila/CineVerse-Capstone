@@ -1,5 +1,6 @@
 package com.example.capstone.favorite
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -13,6 +14,7 @@ import com.example.capstone.favorite.di.favoriteModule
 import com.example.capstone.presentation.detail.DetailActivity
 import com.example.capstone.presentation.home.MovieAdapter
 import com.example.capstone.presentation.model.MovieUiModel
+import com.google.android.play.core.splitcompat.SplitCompat
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
@@ -22,6 +24,11 @@ class FavoriteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFavoriteBinding
     private val viewModel: FavoriteViewModel by viewModel()
     private lateinit var movieAdapter: MovieAdapter
+
+    override fun attachBaseContext(newBase: Context?) {
+        super.attachBaseContext(newBase)
+        SplitCompat.installActivity(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
