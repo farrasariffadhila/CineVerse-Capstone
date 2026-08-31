@@ -1,0 +1,5 @@
+com.example.capstone:layout/activity_favorite = 0x7e020000
+com.example.capstone:layout/fragment_favorite = 0x7e020001
+com.example.capstone:id/rv_favorites = 0x7e010002
+com.example.capstone:id/layout_empty_favorite = 0x7e010001
+com.example.capstone:id/btn_back = 0x7e010000

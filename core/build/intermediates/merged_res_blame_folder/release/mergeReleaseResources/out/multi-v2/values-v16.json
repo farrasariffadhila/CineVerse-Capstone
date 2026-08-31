@@ -1,0 +1,36 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.example.capstone.core-release-44:/values-v16/values-v16.xml",
+            "map": [
+                {
+                    "source": "/Users/farras/.gradle/caches/8.10.2/transforms/fdbfad668642732358dc2c4b3279becb/transformed/appcompat-1.7.0/res/values-v16/values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "223"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "com.example.capstone.core-mergeReleaseResources-42:/values-v16/values-v16.xml",
+            "map": [
+                {
+                    "source": "/Users/farras/.gradle/caches/8.10.2/transforms/fdbfad668642732358dc2c4b3279becb/transformed/appcompat-1.7.0/res/values-v16/values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "223"
+                    }
+                }
+            ]
+        }
+    ]
+}

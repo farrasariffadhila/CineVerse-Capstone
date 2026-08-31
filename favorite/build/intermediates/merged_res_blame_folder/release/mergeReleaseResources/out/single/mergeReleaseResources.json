@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "com.example.capstone.favorite-release-4:/layout_fragment_favorite.xml.flat",
+        "source": "com.example.capstone.favorite-main-5:/layout/fragment_favorite.xml"
+    },
+    {
+        "merged": "com.example.capstone.favorite-release-4:/layout_activity_favorite.xml.flat",
+        "source": "com.example.capstone.favorite-main-5:/layout/activity_favorite.xml"
+    }
+]

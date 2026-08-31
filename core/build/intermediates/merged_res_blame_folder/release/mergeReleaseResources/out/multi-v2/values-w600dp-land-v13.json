@@ -1,0 +1,34 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.example.capstone.core-release-44:/values-w600dp-land-v13/values-w600dp-land-v13.xml",
+            "map": [
+                {
+                    "source": "/Users/farras/.gradle/caches/8.10.2/transforms/9f099bdd3b05244f378a437e6e857b6e/transformed/material-1.12.0/res/values-w600dp-land-v13/values-w600dp-land-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "54",
+                        "endOffsets": "105"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "com.example.capstone.core-mergeReleaseResources-42:/values-w600dp-land-v13/values-w600dp-land-v13.xml",
+            "map": [
+                {
+                    "source": "/Users/farras/.gradle/caches/8.10.2/transforms/9f099bdd3b05244f378a437e6e857b6e/transformed/material-1.12.0/res/values-w600dp-land-v13/values-w600dp-land-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "54",
+                        "endOffsets": "105"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.capstone.core.domain.usecase.MovieInteractorTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2026-08-31T14:37:49" hostname="Mac" time="0.052">
+  <properties/>
+  <testcase name="getFavoriteMovies_returnsFavoritesList" classname="com.example.capstone.core.domain.usecase.MovieInteractorTest" time="0.049"/>
+  <testcase name="getPopularMovies_returnsSuccessFromRepository" classname="com.example.capstone.core.domain.usecase.MovieInteractorTest" time="0.001"/>
+  <testcase name="setFavoriteMovie_updatesStateSuccessfully" classname="com.example.capstone.core.domain.usecase.MovieInteractorTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

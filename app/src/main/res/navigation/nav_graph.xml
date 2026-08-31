@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.capstone.presentation.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_search"
+            app:destination="@id/navigation_search" />
+        <action
+            android:id="@+id/action_home_to_favorite"
+            app:destination="@id/navigation_favorite" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.example.capstone.presentation.search.SearchFragment"
+        android:label="@string/title_search"
+        tools:layout="@layout/fragment_search" />
+
+    <!-- Dynamic Feature Module Destination for :favorite -->
+    <fragment
+        android:id="@+id/navigation_favorite"
+        app:moduleName="favorite"
+        android:name="com.example.capstone.favorite.FavoriteFragment"
+        android:label="@string/title_favorite">
+        <deepLink app:uri="cineverse://favorite" />
+    </fragment>
+
+</navigation>

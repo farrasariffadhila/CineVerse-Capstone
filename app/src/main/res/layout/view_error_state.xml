@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_error"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:visibility="gone">
+
+    <ImageView
+        android:id="@+id/iv_error_icon"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@drawable/ic_refresh"
+        app:tint="@color/primary" />
+
+    <TextView
+        android:id="@+id/tv_error_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Oops! Something went wrong"
+        android:textColor="@color/text_primary"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_error_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="Unable to load movies. Please check your internet connection."
+        android:textColor="@color/text_secondary"
+        android:textSize="14sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_retry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/primary"
+        android:text="Try Again"
+        android:textColor="@color/white"
+        app:cornerRadius="12dp"
+        app:icon="@drawable/ic_refresh"
+        app:iconTint="@color/white" />
+
+</LinearLayout>

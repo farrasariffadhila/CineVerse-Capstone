@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    app:cardBackgroundColor="@color/bg_card"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/stroke_color"
+    app:strokeWidth="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Shimmer Poster Placeholder -->
+        <View
+            android:id="@+id/shimmer_poster"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/shimmer_base"
+            app:layout_constraintDimensionRatio="H,2:3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Shimmer Title & subtitle placeholders -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shimmer_poster">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="14dp"
+                android:background="@color/shimmer_base" />
+
+            <View
+                android:layout_width="80dp"
+                android:layout_height="12dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/shimmer_base" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

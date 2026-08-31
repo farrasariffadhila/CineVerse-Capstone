@@ -1,0 +1,13 @@
+#Mon Aug 31 21:38:02 WIB 2026
+base.0=/Users/farras/Documents/Capstone/favorite/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
+base.1=/Users/farras/Documents/Capstone/favorite/build/intermediates/dex/debug/mergeProjectDexDebug/10/classes.dex
+base.2=/Users/farras/Documents/Capstone/favorite/build/intermediates/dex/debug/mergeProjectDexDebug/4/classes.dex
+base.3=/Users/farras/Documents/Capstone/favorite/build/intermediates/dex/debug/mergeProjectDexDebug/6/classes.dex
+path.0=0/classes.dex
+path.1=10/classes.dex
+path.2=4/classes.dex
+path.3=6/classes.dex
+renamed.0=classes.dex
+renamed.1=classes2.dex
+renamed.2=classes3.dex
+renamed.3=classes4.dex

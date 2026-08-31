@@ -1,0 +1,7 @@
+com.example.capstone.favorite-pngs-0 /Users/farras/Documents/Capstone/favorite/build/generated/res/pngs/debug
+com.example.capstone.favorite-resValues-1 /Users/farras/Documents/Capstone/favorite/build/generated/res/resValues/debug
+com.example.capstone.favorite-packageDebugResources-2 /Users/farras/Documents/Capstone/favorite/build/intermediates/incremental/debug/packageDebugResources/merged.dir
+com.example.capstone.favorite-packageDebugResources-3 /Users/farras/Documents/Capstone/favorite/build/intermediates/incremental/debug/packageDebugResources/stripped.dir
+com.example.capstone.favorite-debug-4 /Users/farras/Documents/Capstone/favorite/build/intermediates/merged_res/debug/mergeDebugResources
+com.example.capstone.favorite-debug-5 /Users/farras/Documents/Capstone/favorite/src/debug/res
+com.example.capstone.favorite-main-6 /Users/farras/Documents/Capstone/favorite/src/main/res

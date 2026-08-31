@@ -1,0 +1,71 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:2:1-30:12
+INJECTED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:2:1-30:12
+INJECTED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:2:1-30:12
+INJECTED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:2:1-30:12
+	package
+		INJECTED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml
+	xmlns:dist
+		ADDED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:3:5-61
+	android:versionCode
+		INJECTED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:2:11-69
+dist:module
+ADDED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:5:5-12:19
+	dist:instant
+		ADDED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:6:9-29
+	dist:title
+		ADDED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:7:9-44
+dist:delivery
+ADDED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:8:9-10:25
+dist:install-time
+ADDED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:9:13-34
+dist:fusing
+ADDED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:11:9-44
+	dist:include
+		ADDED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:11:22-41
+application
+ADDED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:14:5-28:19
+INJECTED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:14:5-28:19
+	android:extractNativeLibs
+		INJECTED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml
+activity#com.example.capstone.favorite.FavoriteActivity
+ADDED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:15:9-27:20
+	android:exported
+		ADDED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:17:13-36
+	android:theme
+		ADDED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:18:13-50
+	android:name
+		ADDED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:16:13-45
+intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:host:favorite+data:scheme:cineverse
+ADDED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:19:13-26:29
+action#android.intent.action.VIEW
+ADDED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:20:17-69
+	android:name
+		ADDED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:20:25-66
+category#android.intent.category.DEFAULT
+ADDED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:21:17-76
+	android:name
+		ADDED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:21:27-73
+category#android.intent.category.BROWSABLE
+ADDED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:22:17-78
+	android:name
+		ADDED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:22:27-75
+data
+ADDED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:23:17-25:50
+	android:host
+		ADDED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:24:21-44
+	android:scheme
+		ADDED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml:25:21-47
+uses-sdk
+INJECTED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml
+INJECTED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/farras/Documents/Capstone/favorite/src/main/AndroidManifest.xml
