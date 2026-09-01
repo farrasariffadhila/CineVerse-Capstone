@@ -33,6 +33,19 @@ jobs:
     - name: Build Debug App Bundle
       run: ./gradlew bundleDebug
 
+    - name: Generate debug keystore
+      run: |
+        mkdir -p "$HOME/.android"
+        keytool -genkeypair -v \
+          -keystore "$HOME/.android/debug.keystore" \
+          -alias androiddebugkey \
+          -keyalg RSA \
+          -keysize 2048 \
+          -validity 10000 \
+          -storepass android \
+          -keypass android \
+          -dname "CN=Android Debug,O=Android,C=US"
+
     - name: Build universal APK (includes Dynamic Feature :favorite)
       run: |
         curl -sL -o bundletool.jar https://github.com/google/bundletool/releases/download/1.17.2/bundletool-all-1.17.2.jar
