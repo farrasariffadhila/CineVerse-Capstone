@@ -24,9 +24,36 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
+    # --- Static analysis -----------------------------------------------------
+    # Lint dikonfigurasi dengan checkDependencies = true dan menaikkan issue
+    # performance/i18n/aksesibilitas menjadi ERROR (lihat app/build.gradle.kts),
+    # sehingga regresi pada aspek tersebut langsung menggagalkan pipeline.
+    - name: Run Android Lint (all modules)
+      run: ./gradlew lint
+
+    - name: Upload Lint Reports
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: lint-reports
+        path: |
+          app/build/reports/lint-results-debug.html
+          core/build/reports/lint-results-debug.html
+
+    # --- Tests ---------------------------------------------------------------
     - name: Run Unit Tests
       run: ./gradlew testDebugUnitTest
 
+    - name: Upload Unit Test Reports
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: unit-test-reports
+        path: |
+          app/build/reports/tests/testDebugUnitTest
+          core/build/reports/tests/testDebugUnitTest
+
+    # --- Debug build (obfuscated: isMinifyEnabled = true) --------------------
     - name: Build Debug APK
       run: ./gradlew assembleDebug
 
@@ -61,6 +88,21 @@ jobs:
         unzip -o app/build/outputs/apk/debug/cineverse-universal.apks -d app/build/outputs/apk/debug/universal
         mv app/build/outputs/apk/debug/universal/universal.apk app/build/outputs/apk/debug/CineVerse-debug-universal.apk
 
+    # --- Release build (obfuscated + resource shrinking) ---------------------
+    - name: Build Release APK & AAB (R8 obfuscation)
+      run: ./gradlew assembleRelease bundleRelease
+
+    - name: Upload R8 mapping files (bukti obfuscation)
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: r8-mapping-files
+        path: |
+          app/build/outputs/mapping/debug/mapping.txt
+          app/build/outputs/mapping/release/mapping.txt
+          core/build/outputs/mapping/debug/mapping.txt
+          core/build/outputs/mapping/release/mapping.txt
+
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
       if: success()
@@ -69,3 +111,4 @@ jobs:
         path: |
           app/build/outputs/apk/debug/CineVerse-debug-universal.apk
           app/build/outputs/bundle/debug/app-debug.aab
+          app/build/outputs/bundle/release/app-release.aab

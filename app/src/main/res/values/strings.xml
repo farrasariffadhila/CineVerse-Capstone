@@ -1,7 +1,53 @@
 <resources>
+
     <string name="app_name">CineVerse</string>
+
+    <!-- Judul destinasi navigasi -->
     <string name="title_home">Home</string>
     <string name="title_search">Search</string>
     <string name="title_favorite">Favorites</string>
-    <string name="title_detail">Movie Detail</string>
+
+    <!-- Branding -->
+    <string name="brand_name" translatable="false">CINEVERSE</string>
+    <string name="brand_tagline">DISCOVER • EXPERIENCE • COLLECT</string>
+    <string name="home_tagline">Discover cinema at your fingertips</string>
+
+    <!-- Layar Home -->
+    <string name="label_featured_spotlight">FEATURED SPOTLIGHT</string>
+    <string name="chip_popular">🔥 Popular</string>
+    <string name="chip_now_playing">🎬 Now Playing</string>
+    <string name="chip_top_rated">⭐ Top Rated</string>
+    <string name="section_popular_titles">Popular Titles</string>
+
+    <!-- Layar Search -->
+    <string name="title_search_movies">Search Movies</string>
+    <string name="hint_search_movies">Search title, actor, or genre…</string>
+
+    <!-- Layar Detail -->
+    <string name="label_storyline">Storyline</string>
+    <string name="label_movie_insights">Movie Insights</string>
+    <string name="label_offline_availability">Offline Availability</string>
+    <string name="status_saved_in_favorites">Saved in Favorites</string>
+    <string name="status_saved_offline">Saved in Favorites (Available Offline)</string>
+    <string name="status_not_favorited">Not Favorited</string>
+    <string name="overview_unavailable">No overview available for this movie.</string>
+
+    <!-- Empty & error state -->
+    <string name="empty_title">No Movies Found</string>
+    <string name="empty_message">Try exploring different titles or adjusting your search.</string>
+    <string name="error_title">Oops! Something went wrong</string>
+    <string name="error_message">Unable to load movies. Please check your internet connection.</string>
+    <string name="action_try_again">Try Again</string>
+
+    <!-- Content description (aksesibilitas) -->
+    <string name="desc_app_logo">CineVerse logo</string>
+    <string name="desc_movie_backdrop">Movie backdrop image</string>
+    <string name="desc_featured_movie">Featured movie backdrop</string>
+    <string name="desc_back">Back</string>
+    <string name="desc_share">Share this movie</string>
+    <string name="desc_toggle_favorite">Add or remove this movie from favorites</string>
+    <string name="desc_clear_search">Clear search keyword</string>
+    <string name="desc_empty_illustration">Empty result illustration</string>
+    <string name="desc_error_illustration">Error illustration</string>
+
 </resources>

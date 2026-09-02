@@ -1,0 +1,11 @@
+<resources>
+
+    <!-- String khusus dynamic feature :favorite -->
+    <string name="favorite_title">My Favorites</string>
+    <string name="favorite_subtitle_activity">Your offline collection</string>
+    <string name="favorite_subtitle_fragment">Your curated offline movie collection</string>
+    <string name="favorite_empty_title">No Favorites Yet</string>
+    <string name="favorite_empty_message">Tap the heart icon on any movie to add it to your offline favorites list.</string>
+    <string name="desc_favorite_empty_illustration">Empty favorites illustration</string>
+
+</resources>

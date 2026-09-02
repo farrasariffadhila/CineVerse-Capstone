@@ -13,6 +13,7 @@
         android:id="@+id/iv_empty_icon"
         android:layout_width="72dp"
         android:layout_height="72dp"
+        android:contentDescription="@string/desc_empty_illustration"
         android:src="@drawable/ic_movie"
         app:tint="@color/text_muted" />
 
@@ -21,7 +22,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="No Movies Found"
+        android:text="@string/empty_title"
         android:textColor="@color/text_primary"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -32,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="Try exploring different titles or adjusting your search."
+        android:text="@string/empty_message"
         android:textColor="@color/text_secondary"
         android:textSize="14sp" />
 

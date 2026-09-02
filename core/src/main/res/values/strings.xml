@@ -1,7 +1,16 @@
 <resources>
-    <string name="app_name">CineVerse</string>
-    <string name="title_home">Home</string>
-    <string name="title_search">Search</string>
-    <string name="title_favorite">Favorites</string>
-    <string name="title_detail">Movie Detail</string>
+
+    <!--
+        String milik :core.
+        Dideklarasikan sekali di sini dan dapat dipakai ulang oleh :app maupun
+        :favorite (keduanya bergantung pada :core), sehingga tidak ada duplikasi.
+    -->
+
+    <!-- Content description (aksesibilitas) -->
+    <string name="desc_movie_poster">Movie poster</string>
+    <string name="desc_favorite_indicator">Saved in favorites</string>
+
+    <!-- Simbol pemisah antar metadata film -->
+    <string name="bullet_separator" translatable="false">•</string>
+
 </resources>

@@ -127,7 +127,7 @@ class DetailActivity : AppCompatActivity() {
         binding.tvDetailOverview.text = if (movie.overview.isNotEmpty()) {
             movie.overview
         } else {
-            "No overview available for this movie."
+            getString(R.string.overview_unavailable)
         }
 
         Glide.with(this)
@@ -147,12 +147,12 @@ class DetailActivity : AppCompatActivity() {
         if (isFav) {
             binding.fabFavorite.setImageResource(com.example.capstone.core.R.drawable.ic_favorite_filled)
             binding.fabFavorite.imageTintList = ContextCompat.getColorStateList(this, com.example.capstone.core.R.color.white)
-            binding.tvOfflineStatus.text = "Saved in Favorites (Available Offline)"
+            binding.tvOfflineStatus.text = getString(R.string.status_saved_offline)
             binding.tvOfflineStatus.setTextColor(ContextCompat.getColor(this, com.example.capstone.core.R.color.accent_cyan))
         } else {
             binding.fabFavorite.setImageResource(com.example.capstone.core.R.drawable.ic_favorite)
             binding.fabFavorite.imageTintList = ContextCompat.getColorStateList(this, com.example.capstone.core.R.color.white)
-            binding.tvOfflineStatus.text = "Not Favorited"
+            binding.tvOfflineStatus.text = getString(R.string.status_not_favorited)
             binding.tvOfflineStatus.setTextColor(ContextCompat.getColor(this, com.example.capstone.core.R.color.text_muted))
         }
     }

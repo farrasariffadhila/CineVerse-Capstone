@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_dark">
+    tools:background="@color/bg_dark">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
                 android:id="@+id/iv_detail_backdrop"
                 android:layout_width="match_parent"
                 android:layout_height="280dp"
-                android:contentDescription="Movie Backdrop"
+                android:contentDescription="@string/desc_movie_backdrop"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +56,7 @@
                     android:id="@+id/iv_detail_poster"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:contentDescription="Movie Poster"
+                    android:contentDescription="@string/desc_movie_poster"
                     android:scaleType="centerCrop"
                     tools:srcCompat="@tools:sample/backgrounds/scenic" />
             </com.google.android.material.card.MaterialCardView>
@@ -122,6 +122,7 @@
                         <ImageView
                             android:layout_width="14dp"
                             android:layout_height="14dp"
+                            android:contentDescription="@null"
                             android:src="@drawable/ic_star" />
 
                         <TextView
@@ -154,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="28dp"
-                android:text="Storyline"
+                android:text="@string/label_storyline"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -201,7 +202,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Movie Insights"
+                        android:text="@string/label_movie_insights"
                         android:textColor="@color/white"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -222,7 +223,7 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Offline Availability"
+                            android:text="@string/label_offline_availability"
                             android:textColor="@color/text_muted"
                             android:textSize="13sp" />
 
@@ -230,7 +231,7 @@
                             android:id="@+id/tv_offline_status"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Saved in Favorites"
+                            android:text="@string/status_saved_in_favorites"
                             android:textColor="@color/accent_cyan"
                             android:textSize="13sp"
                             android:textStyle="bold" />
@@ -257,7 +258,7 @@
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:background="@drawable/bg_circle_button"
-            android:contentDescription="Back"
+            android:contentDescription="@string/desc_back"
             android:src="@drawable/ic_back"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -268,7 +269,7 @@
             android:layout_width="44dp"
             android:layout_height="44dp"
             android:background="@drawable/bg_circle_button"
-            android:contentDescription="Share"
+            android:contentDescription="@string/desc_share"
             android:src="@drawable/ic_share"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -283,7 +284,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="24dp"
-        android:contentDescription="Favorite Button"
+        android:contentDescription="@string/desc_toggle_favorite"
         android:src="@drawable/ic_favorite"
         app:backgroundTint="@color/primary"
         app:elevation="8dp"

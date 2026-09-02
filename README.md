@@ -73,20 +73,103 @@ Untuk mematuhi prinsip Clean Architecture, model dipisahkan pada setiap layernya
 - Navigasi ke modul Dynamic Feature `:favorite` menggunakan Navigation Graph (`nav_graph.xml`) dan DeepLink `cineverse://favorite`.
 
 ### 2. Security
-- **Database Encryption**: Database Room dienkripsi menggunakan **SQLCipher** (`net.zetetic:android-database-sqlcipher:4.5.4`) dengan `SupportFactory`.
-- **Certificate Pinning**: Menggunakan OkHttp `CertificatePinner` dengan SHA-256 public key hash dari SSL TMDb API (`api.themoviedb.org`).
-- **Code Obfuscation (ProGuard / R8)**: Mengaktifkan `isMinifyEnabled = true` dan `isShrinkResources = true` pada release build, lengkap dengan rules di `proguard-rules.pro`.
+- **Database Encryption**: Database Room dienkripsi menggunakan **SQLCipher** (`net.zetetic:android-database-sqlcipher:4.5.4`) dengan `SupportFactory` — lihat `core/src/main/java/com/example/capstone/core/di/CoreModule.kt`.
+- **Certificate Pinning**: Menggunakan OkHttp `CertificatePinner` dengan SHA-256 public key hash dari SSL TMDb API (`api.themoviedb.org`) — file yang sama.
+- **Code Obfuscation (ProGuard / R8)**: Diaktifkan di **seluruh module**, pada buildType **debug maupun release**. Detail lengkap di bagian [Obfuscation di Seluruh Module](#obfuscation-di-seluruh-module).
+- **Backup hardening**: Database terenkripsi dikecualikan dari Auto Backup & device transfer (`app/src/main/res/xml/backup_rules.xml` dan `data_extraction_rules.xml`).
 
 ### 3. Performance & Memory Leak (LeakCanary)
 - Menerapkan **LeakCanary** (`leakcanary-android:2.14`) pada `debugImplementation`.
 - Seluruh adapter dan binding didetach pada `onDestroyView()` untuk memastikan **0 Distinct Leaks**.
+- **Android Lint: 0 issue kategori Performance.** Lihat bagian [Hasil Android Lint](#hasil-android-lint).
 
 <p align="center">
   <img src="docs/images/leakcanary.png" width="300" alt="LeakCanary 0 Leaks" />
 </p>
 
 ### 4. Continuous Integration (CI)
-- Menggunakan **GitHub Actions** (`.github/workflows/android.yml`) untuk menjalankan automated unit tests dan build APK saat push/pull request.
+Menggunakan **GitHub Actions** (`.github/workflows/android.yml`). Setiap push/pull request menjalankan:
+
+| Tahap | Perintah | Keterangan |
+| --- | --- | --- |
+| Static analysis | `./gradlew lint` | Semua module, `checkDependencies = true` |
+| Unit test | `./gradlew testDebugUnitTest` | `:core` + `:app` |
+| Build debug | `./gradlew assembleDebug bundleDebug` | Sudah ter-obfuscate (R8 aktif di debug) |
+| Universal APK | `bundletool build-apks --mode=universal` | Termasuk dynamic feature `:favorite` |
+| Build release | `./gradlew assembleRelease bundleRelease` | R8 + resource shrinking |
+
+Artefak yang diunggah: APK/AAB, laporan lint, laporan unit test, dan **file `mapping.txt` R8** sebagai bukti obfuscation.
+
+---
+
+## Obfuscation di Seluruh Module
+
+Obfuscation dikerjakan oleh **R8**, dan konfigurasinya berbeda per tipe module. Ringkasannya:
+
+| Module | Tipe | `isMinifyEnabled` (debug) | `isMinifyEnabled` (release) | File rules |
+| --- | --- | :---: | :---: | --- |
+| `:app` | `com.android.application` | ✅ `true` | ✅ `true` | `app/proguard-rules.pro` |
+| `:core` | `com.android.library` | ✅ `true` | ✅ `true` | `core/proguard-rules.pro` + `core/consumer-rules.pro` |
+| `:favorite` | `com.android.dynamic-feature` | ⛔ tidak boleh di-set | ⛔ tidak boleh di-set | `favorite/proguard-rules.pro` |
+
+### Kenapa `:favorite` tidak menyetel `isMinifyEnabled`?
+
+Android Gradle Plugin **menolak** dynamic feature module yang menyetel `isMinifyEnabled = true` dan menggagalkan build dengan pesan:
+
+```text
+Dynamic feature modules cannot set minifyEnabled to true.
+minifyEnabled is set to true in build type 'debug'.
+To enable minification for a dynamic feature module,
+set minifyEnabled to true in the base module.
+```
+
+Sesuai instruksi AGP tersebut, minifikasi `:favorite` dijalankan oleh R8 milik **base module `:app`** (yang sudah `true` di debug dan release). File `favorite/proguard-rules.pro` tetap dibaca dan digabungkan ke proses R8 base module.
+
+### Catatan penting soal buildType `debug`
+
+`isMinifyEnabled = true` sudah aktif di `debug`, sehingga R8 **berjalan** (shrinking + optimization + pembacaan seluruh keep rules). Namun AGP secara sengaja **tidak me-rename simbol pada varian yang `debuggable`**, agar stack trace tetap terbaca saat debugging. Hal ini terlihat pada `mapping.txt`:
+
+```text
+# debug   -> pemetaan identitas (R8 jalan, nama tidak di-rename)
+com.example.capstone.core.data.MovieRepositoryImpl -> com.example.capstone.core.data.MovieRepositoryImpl:
+
+# release -> nama benar-benar di-obfuscate
+com.example.capstone.core.utils.Resource            -> g1.d:
+com.example.capstone.core.domain.usecase.MovieInteractor -> f1.a:
+com.example.capstone.favorite.FavoriteViewModel     -> j1.l:
+```
+
+Untuk memverifikasi obfuscation secara langsung, gunakan build release:
+
+```bash
+./gradlew assembleRelease
+grep -v " -> com\.example" app/build/outputs/mapping/release/mapping.txt | grep "^com\.example"
+```
+
+---
+
+## Hasil Android Lint
+
+`./gradlew lint` dijalankan dengan `checkDependencies = true` sehingga `:app`, `:core`, dan `:favorite` masuk dalam satu laporan.
+
+| Kategori | Sebelum | Sesudah |
+| --- | :---: | :---: |
+| Performance | 20 | **0** |
+| — Overdraw | 7 | 0 |
+| — Missing `baselineAligned` | 3 | 0 |
+| — Unused resources | 10 | 0 |
+| Internationalization (`HardcodedText`, `SetTextI18n`) | 41 | **0** |
+| Accessibility (`ContentDescription`) | 14 | **0** |
+| Usability (`Autofill`, `SmallSp`) | 2 | **0** |
+
+Perbaikan yang dilakukan:
+
+- **Overdraw** — `android:background="@color/bg_dark"` pada root layout dihapus karena tema sudah menyetel `android:windowBackground` dengan warna yang sama; warnanya dipindah ke `tools:background` agar preview di Android Studio tidak berubah.
+- **`baselineAligned`** — `android:baselineAligned="false"` ditambahkan pada `LinearLayout` horizontal berisi child ber-`layout_weight`, sehingga framework tidak perlu menghitung baseline.
+- **Unused resources** — palet warna duplikat di `:app` dihapus (satu sumber di `:core`), `app/res/layout/item_movie_card.xml` yang menduplikasi milik `:core` dihapus, string tak terpakai dihapus, dan `backup_rules.xml` / `data_extraction_rules.xml` didaftarkan ke manifest dengan aturan nyata.
+- **Hardcoded text & content description** — seluruh teks dipindah ke `strings.xml` per module, dan setiap `ImageView`/`ImageButton` diberi `contentDescription` (`@null` untuk ikon dekoratif).
+
+Agar tidak terjadi regresi, issue-issue tersebut dinaikkan menjadi **error** di blok `lint { }` pada `app/build.gradle.kts`, sehingga langsung menggagalkan build CI bila muncul kembali.
 
 ---
 

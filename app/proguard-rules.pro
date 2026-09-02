@@ -1,49 +1,52 @@
-# CineVerse ProGuard Rules for Capstone Akhir
+# ============================================================
+# CineVerse :app — ProGuard/R8 rules
+# Obfuscation aktif pada buildType debug & release (isMinifyEnabled = true).
+# Rule untuk model & library :core diwariskan otomatis lewat
+# core/consumer-rules.pro, jadi file ini hanya memuat kebutuhan :app.
+# ============================================================
 
-# Keep Models and Serialization
--keep class com.example.capstone.core.data.source.remote.response.** { *; }
--keep class com.example.capstone.core.data.source.local.entity.** { *; }
--keep class com.example.capstone.core.domain.model.** { *; }
+# --- Model presentation (dipetakan dari domain model) ---
 -keep class com.example.capstone.presentation.model.** { *; }
 
-# Gson Rules
--keepattributes Signature
--keepattributes *Annotation*
--dontwarn sun.misc.**
--keep class com.google.gson.** { *; }
--keepclassmembers class * {
-    @com.google.gson.annotations.SerializedName <fields>;
+# --- Fragment di-instansiasi ulang by-name oleh FragmentManager & Navigation ---
+-keep public class * extends androidx.fragment.app.Fragment
+-keepclassmembers public class * extends androidx.fragment.app.Fragment {
+    public <init>();
 }
 
-# Retrofit & OkHttp
--dontwarn okhttp3.**
--dontwarn retrofit2.**
--keep class retrofit2.** { *; }
--keepclasseswithmembers class * {
-    @retrofit2.http.* <methods>;
-}
+# --- Navigation + Play Feature Delivery (dynamic feature :favorite) ---
+-keep class androidx.navigation.** { *; }
+-keep class com.google.android.play.core.** { *; }
+-dontwarn com.google.android.play.core.**
 
-# Room & SQLCipher
--dontwarn androidx.room.paging.**
--dontwarn net.sqlcipher.**
--keep class androidx.room.** { *; }
--keep class net.sqlcipher.** { *; }
--keep class * extends androidx.room.RoomDatabase
--keep class * extends androidx.room.RoomDatabase$Callback
--dontwarn androidx.sqlite.db.**
+# Catatan: rule -keep untuk entry point dynamic feature :favorite TIDAK ditulis di
+# sini. Module :app tidak bergantung pada :favorite (arah dependensinya terbalik),
+# sehingga nama class tersebut tidak dapat di-resolve dari classpath :app dan
+# dilaporkan sebagai "Unresolved class name" oleh inspeksi Shrinker Config file.
+# Rule-nya berada di favorite/proguard-rules.pro, yang tetap digabungkan ke
+# proses R8 milik base module ini.
 
-# Koin
--dontwarn io.insert.koin.**
--keep class io.insert.koin.** { *; }
+# --- Koin (package sebenarnya org.koin, bukan io.insert.koin) ---
+-dontwarn org.koin.**
+-keep class org.koin.core.** { *; }
+-keep class org.koin.android.** { *; }
 
-# Glide
+# --- Glide ---
 -keep public class * extends com.bumptech.glide.module.AppGlideModule
 -keep public class * extends com.bumptech.glide.module.LibraryGlideModule
--keep class com.bumptech.glide.** { *; }
+-keepclassmembers class * extends com.bumptech.glide.module.AppGlideModule {
+    <init>(...);
+}
 
-# Shimmer
+# --- SQLCipher memuat native library lewat JNI ---
+-keep class net.sqlcipher.** { *; }
+-dontwarn net.sqlcipher.**
+
+# --- Shimmer (dirujuk dari layout XML) ---
 -keep class com.facebook.shimmer.** { *; }
 
-# Navigation Dynamic Feature
--keep class androidx.navigation.** { *; }
--keep class com.example.capstone.favorite.** { *; }
+# --- Buang log level verbose/debug dari APK release ---
+-assumenosideeffects class android.util.Log {
+    public static *** v(...);
+    public static *** d(...);
+}

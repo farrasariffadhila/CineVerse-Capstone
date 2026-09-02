@@ -5,7 +5,7 @@
     android:id="@+id/swipe_refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_dark">
+    tools:background="@color/bg_dark">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -32,6 +32,7 @@
                 <ImageView
                     android:layout_width="32dp"
                     android:layout_height="32dp"
+                    android:contentDescription="@string/desc_app_logo"
                     android:src="@drawable/ic_movie"
                     app:tint="@color/primary" />
 
@@ -46,7 +47,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:letterSpacing="0.08"
-                        android:text="CINEVERSE"
+                        android:text="@string/brand_name"
                         android:textColor="@color/white"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -54,7 +55,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Discover cinema at your fingertips"
+                        android:text="@string/home_tagline"
                         android:textColor="@color/text_secondary"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -86,7 +87,7 @@
                         android:id="@+id/iv_featured_backdrop"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:contentDescription="Featured Movie"
+                        android:contentDescription="@string/desc_featured_movie"
                         android:scaleType="centerCrop"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -111,9 +112,9 @@
                         android:paddingTop="3dp"
                         android:paddingEnd="10dp"
                         android:paddingBottom="3dp"
-                        android:text="FEATURED SPOTLIGHT"
+                        android:text="@string/label_featured_spotlight"
                         android:textColor="@color/white"
-                        android:textSize="10sp"
+                        android:textSize="11sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -151,6 +152,7 @@
                             <ImageView
                                 android:layout_width="14dp"
                                 android:layout_height="14dp"
+                                android:contentDescription="@null"
                                 android:src="@drawable/ic_star" />
 
                             <TextView
@@ -201,7 +203,7 @@
                         android:background="@drawable/bg_chip_selected"
                         android:clickable="true"
                         android:focusable="true"
-                        android:text="🔥 Popular"
+                        android:text="@string/chip_popular"
                         android:textColor="@color/white"
                         android:textSize="13sp"
                         android:textStyle="bold" />
@@ -214,7 +216,7 @@
                         android:background="@drawable/bg_chip_unselected"
                         android:clickable="true"
                         android:focusable="true"
-                        android:text="🎬 Now Playing"
+                        android:text="@string/chip_now_playing"
                         android:textColor="@color/text_secondary"
                         android:textSize="13sp"
                         android:textStyle="bold" />
@@ -227,7 +229,7 @@
                         android:background="@drawable/bg_chip_unselected"
                         android:clickable="true"
                         android:focusable="true"
-                        android:text="⭐ Top Rated"
+                        android:text="@string/chip_top_rated"
                         android:textColor="@color/text_secondary"
                         android:textSize="13sp"
                         android:textStyle="bold" />
@@ -242,7 +244,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="Popular Titles"
+                android:text="@string/section_popular_titles"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -267,6 +269,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:baselineAligned="false"
                         android:orientation="horizontal">
 
                         <include
@@ -286,6 +289,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:baselineAligned="false"
                         android:orientation="horizontal">
 
                         <include

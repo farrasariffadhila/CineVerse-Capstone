@@ -8,7 +8,6 @@
 
     <color name="bg_dark">#0B0E14</color>
     <color name="bg_surface">#151B26</color>
-    <color name="bg_surface_variant">#1E2638</color>
     <color name="bg_surface_highlight">#28334A</color>
     <color name="bg_card">#182030</color>
     <color name="stroke_color">#2A364F</color>
@@ -23,6 +22,5 @@
     <color name="shimmer_base">#1E2638</color>
     <color name="shimmer_highlight">#334155</color>
     <color name="transparent">#00000000</color>
-    <color name="black_scrim">#CC0B0E14</color>
     <color name="white">#FFFFFF</color>
 </resources>

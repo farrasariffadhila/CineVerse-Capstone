@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_dark"
+    tools:background="@color/bg_dark"
     android:orientation="vertical">
 
     <!-- Favorite Header -->
@@ -20,7 +20,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="My Favorites"
+            android:text="@string/favorite_title"
             android:textColor="@color/white"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:text="Your curated offline movie collection"
+            android:text="@string/favorite_subtitle_fragment"
             android:textColor="@color/text_secondary"
             android:textSize="12sp" />
     </LinearLayout>
@@ -62,6 +62,7 @@
         <ImageView
             android:layout_width="72dp"
             android:layout_height="72dp"
+            android:contentDescription="@string/desc_favorite_empty_illustration"
             android:src="@drawable/ic_favorite"
             app:tint="@color/text_muted" />
 
@@ -69,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="No Favorites Yet"
+            android:text="@string/favorite_empty_title"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -79,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:gravity="center"
-            android:text="Tap the heart icon on any movie to add it to your offline favorites list."
+            android:text="@string/favorite_empty_message"
             android:textColor="@color/text_secondary"
             android:textSize="14sp" />
 
