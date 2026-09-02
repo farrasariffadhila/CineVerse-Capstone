@@ -1,7 +1,0 @@
-R_DEF: Internal format may change without notice
-local
-id btn_back
-id layout_empty_favorite
-id rv_favorites
-layout activity_favorite
-layout fragment_favorite

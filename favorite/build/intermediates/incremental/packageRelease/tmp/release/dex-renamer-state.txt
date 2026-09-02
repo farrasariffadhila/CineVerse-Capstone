@@ -1,4 +1,0 @@
-#Mon Aug 31 21:39:24 WIB 2026
-base.0=/Users/farras/Documents/Capstone/app/build/intermediates/feature_dex/release/minifyReleaseWithR8/feature-favorite/classes.dex
-path.0=classes.dex
-renamed.0=classes.dex

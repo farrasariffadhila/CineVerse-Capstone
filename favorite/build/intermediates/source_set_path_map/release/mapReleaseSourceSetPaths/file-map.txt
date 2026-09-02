@@ -1,7 +1,0 @@
-com.example.capstone.favorite-pngs-0 /Users/farras/Documents/Capstone/favorite/build/generated/res/pngs/release
-com.example.capstone.favorite-resValues-1 /Users/farras/Documents/Capstone/favorite/build/generated/res/resValues/release
-com.example.capstone.favorite-packageReleaseResources-2 /Users/farras/Documents/Capstone/favorite/build/intermediates/incremental/release/packageReleaseResources/merged.dir
-com.example.capstone.favorite-packageReleaseResources-3 /Users/farras/Documents/Capstone/favorite/build/intermediates/incremental/release/packageReleaseResources/stripped.dir
-com.example.capstone.favorite-release-4 /Users/farras/Documents/Capstone/favorite/build/intermediates/merged_res/release/mergeReleaseResources
-com.example.capstone.favorite-main-5 /Users/farras/Documents/Capstone/favorite/src/main/res
-com.example.capstone.favorite-release-6 /Users/farras/Documents/Capstone/favorite/src/release/res

@@ -1,5 +1,0 @@
-int id btn_back 0x7e010000
-int id layout_empty_favorite 0x7e010001
-int id rv_favorites 0x7e010002
-int layout activity_favorite 0x7e020000
-int layout fragment_favorite 0x7e020001
