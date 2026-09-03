@@ -21,7 +21,6 @@ android {
 
     buildTypes {
         release {
-            // Obfuscation + code shrinking (R8) untuk build produksi.
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
@@ -30,10 +29,8 @@ android {
             )
         }
         debug {
-            // Obfuscation juga diaktifkan pada mode debug agar aplikasi yang
-            // dijalankan/diuji sudah berjalan di atas kode yang ter-obfuscate.
             isMinifyEnabled = true
-            isShrinkResources = false
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -52,11 +49,8 @@ android {
     }
 
     lint {
-        // Ikut menganalisis :core dan :favorite dalam satu laporan.
         checkDependencies = true
         abortOnError = true
-        // Aspek yang menjadi catatan reviewer diangkat menjadi ERROR supaya
-        // regresi langsung menggagalkan pipeline CI, bukan lolos sebagai warning.
         error += listOf(
             "Overdraw",
             "UnusedResources",

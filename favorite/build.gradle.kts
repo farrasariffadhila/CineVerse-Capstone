@@ -13,24 +13,13 @@ android {
     }
 
     buildTypes {
-        // Catatan: Android Gradle Plugin MELARANG dynamic feature module
-        // menyetel `isMinifyEnabled = true` dan akan menggagalkan build dengan pesan:
-        //   "Dynamic feature modules cannot set minifyEnabled to true.
-        //    To enable minification for a dynamic feature module,
-        //    set minifyEnabled to true in the base module."
-        // Obfuscation module ini dijalankan oleh R8 milik base module (:app),
-        // yang sudah mengaktifkan isMinifyEnabled = true pada debug DAN release.
-        // `proguardFiles` di bawah tetap dibaca dan digabungkan ke proses R8 base module.
+        // Minifikasi dynamic feature dijalankan oleh R8 base module (:app).
         release {
             isMinifyEnabled = false
-            // getDefaultProguardFile() tidak boleh dipakai di dynamic feature
-            // (sudah disertakan oleh base module :app).
             proguardFiles("proguard-rules.pro")
         }
         debug {
             isMinifyEnabled = false
-            // getDefaultProguardFile() tidak boleh dipakai di dynamic feature
-            // (sudah disertakan oleh base module :app).
             proguardFiles("proguard-rules.pro")
         }
     }
